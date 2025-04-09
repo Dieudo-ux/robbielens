@@ -150,3 +150,79 @@ footer img.logo {
     font-size: 1em;
   }
 }
+/* ---- Burger animé ---- */
+.burger {
+  width: 30px;
+  height: 22px;
+  position: relative;
+  cursor: pointer;
+  display: none; /* visible seulement en mobile */
+  z-index: 1001; /* au-dessus du menu */
+}
+
+.burger span {
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background: black;
+  left: 0;
+  transition: 0.3s ease;
+  border-radius: 2px;
+}
+
+.burger span:nth-child(1) { top: 0; }
+.burger span:nth-child(2) { top: 9px; }
+.burger span:nth-child(3) { top: 18px; }
+
+.burger.open span:nth-child(1) {
+  transform: rotate(45deg);
+  top: 9px;
+}
+
+.burger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.burger.open span:nth-child(3) {
+  transform: rotate(-45deg);
+  top: 9px;
+}
+
+/* ---- Menu mobile responsive ---- */
+@media (max-width: 768px) {
+  .burger {
+    display: block;
+  }
+
+  .nav-links {
+    overflow: hidden;
+    flex-direction: column;
+    max-height: 0;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background-color: #ececec;
+    text-align: center;
+    padding: 0;
+    z-index: 1000;
+    transition: max-height 0.3s ease;
+  }
+
+  .nav-links.active {
+    max-height: 300px;
+    padding: 15px 0;
+  }
+
+  /* Effet fond sombre derrière le menu */
+  body.menu-open::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    z-index: 999;
+    backdrop-filter: blur(2px);
+  }
+}
